@@ -7,6 +7,7 @@
 
 [node name="cookie" type="Node2D"]
 script = ExtResource("1_adq88")
+metadata/Energy = 250.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

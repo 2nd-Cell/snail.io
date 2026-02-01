@@ -7,6 +7,7 @@
 
 [node name="swiss_roll" type="Node2D"]
 script = ExtResource("1_6dmxc")
+metadata/Energy = 300.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

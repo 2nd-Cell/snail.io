@@ -7,6 +7,7 @@
 
 [node name="kiwi" type="Node2D"]
 script = ExtResource("1_nvbqm")
+metadata/Energy = 210.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

@@ -15,8 +15,8 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 3
 script = ExtResource("1_hjaqi")
+metadata/IsPlayer = true
 
 [node name="snail_ui" parent="." instance=ExtResource("2_ajqqa")]
 scale = Vector2(0.2, 0.2)
@@ -35,7 +35,9 @@ initial_state = NodePath("idle")
 [node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("4_5lop3")
 next_state = NodePath("../idle")
+move_energy_multiplier = -40.0
 
 [node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("5_ajqqa")
 next_state = NodePath("../move")
+idle_energy_multiplier = -10.0

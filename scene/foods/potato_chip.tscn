@@ -7,6 +7,7 @@
 
 [node name="potato_chip" type="Node2D"]
 script = ExtResource("1_2j5hp")
+metadata/Energy = 67.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

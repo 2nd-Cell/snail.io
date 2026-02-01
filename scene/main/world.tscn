@@ -1,29 +1,42 @@
-[gd_scene load_steps=6 format=3 uid="uid://d320b0qssxwmk"]
+[gd_scene load_steps=17 format=3 uid="uid://d320b0qssxwmk"]
 
 [ext_resource type="PackedScene" uid="uid://dug4ua7ratlkk" path="res://scene/player/player.tscn" id="1_vi146"]
 [ext_resource type="PackedScene" uid="uid://dvttkogxh6loj" path="res://scene/foods/foods.tscn" id="3_wqu2a"]
+[ext_resource type="PackedScene" uid="uid://cesti3mcneom2" path="res://scene/foods/apple.tscn" id="3_yxe88"]
 [ext_resource type="PackedScene" uid="uid://bk7whuy8efnuw" path="res://scene/utility/energy.tscn" id="4_bd0wy"]
+[ext_resource type="PackedScene" uid="uid://b6ufvpweawuuw" path="res://scene/foods/bread.tscn" id="4_ic33h"]
 [ext_resource type="Texture2D" uid="uid://2ai1wd7kqak4" path="res://ui/red_polka_dots.svg" id="4_xbvrl"]
 [ext_resource type="Texture2D" uid="uid://dd5jaasaub1yh" path="res://ui/green_polka_dots.svg" id="5_bd0wy"]
+[ext_resource type="PackedScene" uid="uid://c5ujewtq70q62" path="res://scene/foods/cake.tscn" id="5_cyco2"]
+[ext_resource type="PackedScene" uid="uid://uixqclor8jnl" path="res://scene/foods/cookie.tscn" id="6_v27ov"]
+[ext_resource type="PackedScene" uid="uid://c7l0cetkgxpkx" path="res://scene/foods/doughnut.tscn" id="7_27qtj"]
+[ext_resource type="PackedScene" uid="uid://dy22rjb6ja3s7" path="res://scene/foods/hotdog.tscn" id="8_j11x4"]
+[ext_resource type="PackedScene" uid="uid://ppupkcu1rhww" path="res://scene/foods/kiwi.tscn" id="10_ffynj"]
+[ext_resource type="PackedScene" uid="uid://cn6m534lwvkwx" path="res://scene/foods/pizza.tscn" id="11_vnbt1"]
+[ext_resource type="PackedScene" uid="uid://r872qbemi4d7" path="res://scene/foods/potato_chip.tscn" id="12_brwcr"]
+[ext_resource type="PackedScene" uid="uid://dow41xojfdrv5" path="res://scene/foods/swiss_roll.tscn" id="13_ke1e5"]
+[ext_resource type="PackedScene" uid="uid://dwie2wvsvqm24" path="res://scene/powerups/powerup_spawner.tscn" id="16_yxe88"]
 
 [node name="world" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_vi146")]
+[node name="Player" parent="." node_paths=PackedStringArray("healthbar") instance=ExtResource("1_vi146")]
+healthbar = NodePath("energy")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="foods" parent="." instance=ExtResource("3_wqu2a")]
-
-[node name="energy" parent="." instance=ExtResource("4_bd0wy")]
+[node name="energy" parent="Player" instance=ExtResource("4_bd0wy")]
+visible = false
 z_index = 2
-offset_left = 129.0
-offset_top = 47.999985
-offset_right = 1151.0
-offset_bottom = 352.0
+offset_left = -510.0
+offset_top = -285.0
+offset_right = 2019.9998
+offset_bottom = 115.0
 scale = Vector2(0.1, 0.1)
 
+[node name="foods" parent="." instance=ExtResource("3_wqu2a")]
+foods = Array[PackedScene]([ExtResource("3_yxe88"), ExtResource("4_ic33h"), ExtResource("5_cyco2"), ExtResource("6_v27ov"), ExtResource("7_27qtj"), ExtResource("8_j11x4"), ExtResource("10_ffynj"), ExtResource("11_vnbt1"), ExtResource("12_brwcr"), ExtResource("13_ke1e5")])
+
 [node name="unsafe" type="TextureRect" parent="."]
-visible = false
 z_index = -1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,9 +63,10 @@ texture = ExtResource("5_bd0wy")
 expand_mode = 2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2(71, 100)
 build_mode = 1
 polygon = PackedVector2Array(-668, -515, -668, 1399, 1656, 1405, 1674, -515)
+
+[node name="PowerupSpawner" parent="." instance=ExtResource("16_yxe88")]

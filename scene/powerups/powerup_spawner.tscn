@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwie2wvsvqm24"]
+
+[ext_resource type="Script" uid="uid://d2h702yibexri" path="res://script/powerups/powerup_spawner.gd" id="1_g7syv"]
+[ext_resource type="PackedScene" uid="uid://csw5u1oocau8f" path="res://scene/powerups/score.tscn" id="2_80t1d"]
+[ext_resource type="PackedScene" uid="uid://cchp4fyevar0t" path="res://scene/powerups/shield.tscn" id="3_y5jgd"]
+[ext_resource type="PackedScene" uid="uid://bni457oksll5n" path="res://scene/powerups/speed.tscn" id="4_cfx2n"]
+[ext_resource type="PackedScene" uid="uid://cws4eepn2afwu" path="res://scene/powerups/strength.tscn" id="5_hxole"]
+
+[node name="PowerupSpawner" type="Node2D"]
+script = ExtResource("1_g7syv")
+foods = Array[PackedScene]([ExtResource("2_80t1d"), ExtResource("3_y5jgd"), ExtResource("4_cfx2n"), ExtResource("5_hxole")])
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+ignore_time_scale = true

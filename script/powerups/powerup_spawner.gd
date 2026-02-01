@@ -1,16 +1,6 @@
 extends Node2D
 
 @export var foods: Array[PackedScene] = [
-preload("res://scene/foods/apple.tscn"),
-preload("res://scene/foods/cake.tscn"),
-preload("res://scene/foods/kiwi.tscn"),
-preload("res://scene/foods/swiss_roll.tscn"),
-preload("res://scene/foods/bread.tscn"),
-preload("res://scene/foods/cookie.tscn"),
-preload("res://scene/foods/doughnut.tscn"),
-preload("res://scene/foods/hotdog.tscn"),
-preload("res://scene/foods/pizza.tscn"),
-preload("res://scene/foods/potato_chip.tscn")
 ]
 
 var rng = RandomNumberGenerator.new()
