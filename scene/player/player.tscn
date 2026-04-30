@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dug4ua7ratlkk"]
 
 [ext_resource type="Script" uid="uid://dxrv1gn3y45cf" path="res://script/player/player.gd" id="1_hjaqi"]
-[ext_resource type="PackedScene" uid="uid://cdyact6porgf2" path="res://scene/player/snail_ui.tscn" id="2_ajqqa"]
+[ext_resource type="Texture2D" uid="uid://danbfprgpiia" path="res://icon.svg" id="2_ajqqa"]
 [ext_resource type="Script" uid="uid://cbvp8t2mm6gx6" path="res://script/utility/state_machine.gd" id="3_6smn3"]
 [ext_resource type="Script" uid="uid://duic030kjyt6t" path="res://script/state/move.gd" id="4_5lop3"]
 [ext_resource type="Script" uid="uid://b2j6jblf5dooj" path="res://script/state/idle.gd" id="5_ajqqa"]
@@ -18,8 +18,8 @@ properties/0/replication_mode = 1
 script = ExtResource("1_hjaqi")
 metadata/IsPlayer = true
 
-[node name="snail_ui" parent="." instance=ExtResource("2_ajqqa")]
-scale = Vector2(0.2, 0.2)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ajqqa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -1)
@@ -35,9 +35,9 @@ initial_state = NodePath("idle")
 [node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("4_5lop3")
 next_state = NodePath("../idle")
-move_energy_multiplier = -40.0
+move_energy_multiplier = -70.0
 
 [node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("5_ajqqa")
 next_state = NodePath("../move")
-idle_energy_multiplier = -10.0
+idle_energy_multiplier = -50.0

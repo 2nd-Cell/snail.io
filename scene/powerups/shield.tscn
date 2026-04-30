@@ -1,6 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://cchp4fyevar0t"]
+[gd_scene load_steps=6 format=3 uid="uid://cchp4fyevar0t"]
 
 [ext_resource type="Texture2D" uid="uid://cewt03fahx3vn" path="res://ui/shield.png" id="1_okb7e"]
+
+[sub_resource type="Animation" id="Animation_geh7t"]
+resource_name = "flip"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.1, 1), Vector2(-1, 1), Vector2(-0.1, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tnf3r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8fgsd"]
+_data = {
+&"RESET": SubResource("Animation_tnf3r"),
+&"flip": SubResource("Animation_geh7t")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lj0xh"]
 radius = 451.95575
@@ -9,6 +47,11 @@ radius = 451.95575
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_okb7e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_8fgsd")
+}
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8

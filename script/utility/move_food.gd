@@ -7,6 +7,8 @@ var sprite: Sprite2D
 
 var energy: float = 0.0
 
+@export var score: int
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer.autostart = false
@@ -38,6 +40,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.get_meta("IsPlayer", false):
 		body._add_energy(energy)
+		body._add_score(score)
 	queue_free()
 
 

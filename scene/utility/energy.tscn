@@ -1,36 +1,83 @@
-[gd_scene load_steps=11 format=3 uid="uid://bk7whuy8efnuw"]
+[gd_scene load_steps=17 format=3 uid="uid://bk7whuy8efnuw"]
 
 [ext_resource type="Script" uid="uid://cwj1goi45ttl5" path="res://script/utility/energy.gd" id="1_ksnno"]
 [ext_resource type="Texture2D" uid="uid://4rtu2n5n0bph" path="res://ui/energy_bar_under.png" id="1_tm8gr"]
 [ext_resource type="Texture2D" uid="uid://crnfa85v87eox" path="res://ui/energy_bar_progress.png" id="2_4c0to"]
 [ext_resource type="Texture2D" uid="uid://lmylq00g7sfe" path="res://ui/power_up_circle.png" id="3_4c0to"]
 [ext_resource type="Texture2D" uid="uid://bwfpgcbel5i80" path="res://ui/buff_bar_under.png" id="5_fjpir"]
+[ext_resource type="Script" uid="uid://bofa2vijeiq02" path="res://script/powerups/star.gd" id="6_43x7s"]
 [ext_resource type="Texture2D" uid="uid://ebqffhjx3mbr" path="res://ui/buff_bar_progress.png" id="6_twrbb"]
+[ext_resource type="Texture2D" uid="uid://dye3hr62qhxm" path="res://ui/star_unblur.png" id="7_43x7s"]
 [ext_resource type="Texture2D" uid="uid://bqcrr2vv2giqn" path="res://ui/star.png" id="7_twrbb"]
+[ext_resource type="Texture2D" uid="uid://ib6lh08kf2na" path="res://ui/star_blur.png" id="8_hly1v"]
 
-[sub_resource type="Animation" id="Animation_fjpir"]
-resource_name = "flip"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("buff:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.1, 1), Vector2(-1, 1), Vector2(-0.1, 1), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_twrbb"]
+[sub_resource type="Animation" id="Animation_0hiso"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("buff:scale")
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.6, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3jpxh"]
+resource_name = "spin_enter"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.125), Vector2(1.6, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ur8p6"]
+_data = {
+&"RESET": SubResource("Animation_0hiso"),
+&"spin_enter": SubResource("Animation_3jpxh")
+}
+
+[sub_resource type="Animation" id="Animation_7r5fu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -39,11 +86,52 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uujkg"]
+[sub_resource type="Animation" id="Animation_by4au"]
+resource_name = "twinkle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(0.1, 0.1), Vector2(0.1, 0.1), Vector2(1, 1), Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.4363323129985824]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ywp16"]
 _data = {
-&"RESET": SubResource("Animation_twrbb"),
-&"flip": SubResource("Animation_fjpir")
+&"RESET": SubResource("Animation_7r5fu"),
+&"twinkle": SubResource("Animation_by4au")
 }
 
 [node name="energy_bar" type="Control"]
@@ -65,11 +153,43 @@ texture_progress = ExtResource("2_4c0to")
 texture_progress_offset = Vector2(80, 25)
 script = ExtResource("1_ksnno")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="buff_circle" type="Sprite2D" parent="."]
 z_index = 1
 position = Vector2(-40, 169)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_4c0to")
+
+[node name="star" type="Sprite2D" parent="buff_circle"]
+visible = false
+position = Vector2(29.999992, -15.000008)
+scale = Vector2(1.6, 2)
+texture = ExtResource("7_twrbb")
+script = ExtResource("6_43x7s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="buff_circle/star"]
+libraries = {
+&"": SubResource("AnimationLibrary_ur8p6")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="buff_circle/star"]
+visible = false
+position = Vector2(-81.24999, -107.5)
+texture = ExtResource("7_43x7s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="buff_circle/star/Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_ywp16")
+}
+
+[node name="Sprite2D2" type="Sprite2D" parent="buff_circle/star"]
+visible = false
+position = Vector2(-81.24999, -107.5)
+texture = ExtResource("8_hly1v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="buff_circle/star/Sprite2D2"]
+libraries = {
+&"": SubResource("AnimationLibrary_ywp16")
+}
 
 [node name="BuffBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
@@ -80,16 +200,5 @@ offset_bottom = 360.0
 value = 50.0
 texture_under = ExtResource("5_fjpir")
 texture_progress = ExtResource("6_twrbb")
-texture_progress_offset = Vector2(0, 14)
+texture_progress_offset = Vector2(0, 2)
 tint_progress = Color(1.2246495, 0.008708539, 0, 1)
-
-[node name="buff" type="Sprite2D" parent="."]
-z_index = 2
-position = Vector2(-43, 175)
-texture = ExtResource("7_twrbb")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="buff"]
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_uujkg")
-}

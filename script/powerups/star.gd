@@ -1,17 +1,12 @@
-extends TextureProgressBar
+extends Sprite2D
 
-
-var game := true
-var Energy : float = 100.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	$AnimationPlayer.play("spin_enter")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	if Energy > 0:
-		Energy -= 0.05
-		
-	value = Energy
+	$Sprite2D/AnimationPlayer.play("twinkle")
+	$Sprite2D2/AnimationPlayer.play("twinkle")

@@ -1,72 +1,63 @@
-[gd_scene load_steps=17 format=3 uid="uid://d320b0qssxwmk"]
+[gd_scene load_steps=9 format=3 uid="uid://3gmhkbuqjpnj"]
 
 [ext_resource type="PackedScene" uid="uid://dug4ua7ratlkk" path="res://scene/player/player.tscn" id="1_vi146"]
-[ext_resource type="PackedScene" uid="uid://dvttkogxh6loj" path="res://scene/foods/foods.tscn" id="3_wqu2a"]
-[ext_resource type="PackedScene" uid="uid://cesti3mcneom2" path="res://scene/foods/apple.tscn" id="3_yxe88"]
 [ext_resource type="PackedScene" uid="uid://bk7whuy8efnuw" path="res://scene/utility/energy.tscn" id="4_bd0wy"]
-[ext_resource type="PackedScene" uid="uid://b6ufvpweawuuw" path="res://scene/foods/bread.tscn" id="4_ic33h"]
-[ext_resource type="Texture2D" uid="uid://2ai1wd7kqak4" path="res://ui/red_polka_dots.svg" id="4_xbvrl"]
-[ext_resource type="Texture2D" uid="uid://dd5jaasaub1yh" path="res://ui/green_polka_dots.svg" id="5_bd0wy"]
-[ext_resource type="PackedScene" uid="uid://c5ujewtq70q62" path="res://scene/foods/cake.tscn" id="5_cyco2"]
-[ext_resource type="PackedScene" uid="uid://uixqclor8jnl" path="res://scene/foods/cookie.tscn" id="6_v27ov"]
-[ext_resource type="PackedScene" uid="uid://c7l0cetkgxpkx" path="res://scene/foods/doughnut.tscn" id="7_27qtj"]
-[ext_resource type="PackedScene" uid="uid://dy22rjb6ja3s7" path="res://scene/foods/hotdog.tscn" id="8_j11x4"]
-[ext_resource type="PackedScene" uid="uid://ppupkcu1rhww" path="res://scene/foods/kiwi.tscn" id="10_ffynj"]
-[ext_resource type="PackedScene" uid="uid://cn6m534lwvkwx" path="res://scene/foods/pizza.tscn" id="11_vnbt1"]
-[ext_resource type="PackedScene" uid="uid://r872qbemi4d7" path="res://scene/foods/potato_chip.tscn" id="12_brwcr"]
-[ext_resource type="PackedScene" uid="uid://dow41xojfdrv5" path="res://scene/foods/swiss_roll.tscn" id="13_ke1e5"]
-[ext_resource type="PackedScene" uid="uid://dwie2wvsvqm24" path="res://scene/powerups/powerup_spawner.tscn" id="16_yxe88"]
+[ext_resource type="Texture2D" uid="uid://danbfprgpiia" path="res://icon.svg" id="4_k5nhp"]
+[ext_resource type="Script" uid="uid://bi3uogmoqmkmt" path="res://script/utility/pop_up.gd" id="5_duyj1"]
+[ext_resource type="PackedScene" uid="uid://bgwm28coyodai" path="res://scene/foods/candy.tscn" id="6_clw4o"]
+[ext_resource type="PackedScene" uid="uid://csw5u1oocau8f" path="res://scene/powerups/score_buff.tscn" id="7_y361o"]
+[ext_resource type="PackedScene" uid="uid://bu7iodg8bewvb" path="res://scene/utility/game_score.tscn" id="17_ic33h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vdike"]
+radius = 35.0
 
 [node name="world" type="Node2D"]
 
-[node name="Player" parent="." node_paths=PackedStringArray("healthbar") instance=ExtResource("1_vi146")]
-healthbar = NodePath("energy")
+[node name="Player" parent="." node_paths=PackedStringArray("healthbar", "score_scene") instance=ExtResource("1_vi146")]
+position = Vector2(576, 324)
+healthbar = NodePath("energy_bar")
+score_scene = NodePath("score")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="energy" parent="Player" instance=ExtResource("4_bd0wy")]
-visible = false
+[node name="energy_bar" parent="Player" instance=ExtResource("4_bd0wy")]
 z_index = 2
-offset_left = -510.0
-offset_top = -285.0
-offset_right = 2019.9998
-offset_bottom = 115.0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -526.99994
+offset_top = -297.99997
+offset_right = -426.99994
+offset_bottom = 69.00003
+grow_horizontal = 1
+grow_vertical = 1
 scale = Vector2(0.1, 0.1)
 
-[node name="foods" parent="." instance=ExtResource("3_wqu2a")]
-foods = Array[PackedScene]([ExtResource("3_yxe88"), ExtResource("4_ic33h"), ExtResource("5_cyco2"), ExtResource("6_v27ov"), ExtResource("7_27qtj"), ExtResource("8_j11x4"), ExtResource("10_ffynj"), ExtResource("11_vnbt1"), ExtResource("12_brwcr"), ExtResource("13_ke1e5")])
+[node name="score" parent="Player" instance=ExtResource("17_ic33h")]
+z_index = 2
+offset_left = 247.0
+offset_top = -306.0
+offset_right = 571.0
+offset_bottom = -253.0
+text = "[font=res://ui/fonts/Archivo-VariableFont_wdth,wght.ttf][outline_size=12][outline_color=red][font_size=32][color=]SCORE[/color][/font_size][/outline_color][/outline_size][/font]"
 
-[node name="unsafe" type="TextureRect" parent="."]
-z_index = -1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -594.0
-offset_top = -406.0
-offset_right = 1735.0
-offset_bottom = 1508.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_xbvrl")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(242, 463)
+texture = ExtResource("4_k5nhp")
 
-[node name="safe" type="TextureRect" parent="."]
-z_index = -1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1153.0
-offset_bottom = 1123.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-texture = ExtResource("5_bd0wy")
-expand_mode = 2
+[node name="popUp" type="Node2D" parent="."]
+script = ExtResource("5_duyj1")
+spawn_scene = ExtResource("6_clw4o")
+spawn_interval = 0.5
+spawn_area = Rect2(0, 0, 1150, 650)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="ShapeCast2D" type="ShapeCast2D" parent="popUp"]
+shape = SubResource("CircleShape2D_vdike")
+target_position = Vector2(0, 0)
+collide_with_areas = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(71, 100)
-build_mode = 1
-polygon = PackedVector2Array(-668, -515, -668, 1399, 1656, 1405, 1674, -515)
+[node name="Timer" type="Timer" parent="popUp"]
 
-[node name="PowerupSpawner" parent="." instance=ExtResource("16_yxe88")]
+[node name="Node2D" parent="." instance=ExtResource("7_y361o")]
+position = Vector2(17, 339)
+scale = Vector2(0.08, 0.08)
