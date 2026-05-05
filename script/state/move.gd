@@ -7,7 +7,6 @@ class_name move
 
 @export var move_energy_multiplier: float = 1.0
 @export var SPEED = 500.0
-
 var mouse_position := Vector2(0,0)
 
 func enter():
@@ -19,26 +18,39 @@ func exit():
 
 func update(delta: float):
 	super(delta)
-	mouse_position = $"../..".to_local($"../..".get_global_mouse_position())
+	match OS.get_name():
+		"Windows", "macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD":
+			mouse_position = $"../..".to_local($"../..".get_global_mouse_position())
+		"Android", "iOS":
+			pass
+		"Web":
+			pass
+		_:
+			mouse_position = $"../..".to_local($"../..".get_global_mouse_position())
+			
+	
 	var bar = $"../..".healthbar.get_node("TextureProgressBar")
 	#if bar != null:
 		#bar._update_health( move_energy_multiplier * delta )
 	
 func physics_update(delta: float):
 	super(delta)
+	var is_mobile = false
+	var speed = SPEED
+	match OS.get_name():
+		"Android", "iOS":
+			is_mobile = true
 	
-	#if mouse_position.length() <= 50:
-		#transitioned.emit(self, next_state)
-	#
-	#if mouse_position.x < 0:
-		#if $"../../snail_ui".scale.x < 0 :
-			#$"../../snail_ui".scale.x*=-1
-#
-	#else:
-		#if $"../../snail_ui".scale.x > 0 :
-			#$"../../snail_ui".scale.x*=-1
-	
-	#print(direction)
-	$"../..".velocity = mouse_position.normalized() * SPEED
-#
+	speed += $"../..".speed_boost
+			
+	if not is_mobile:
+		if mouse_position.length() > 50:
+			$"../..".velocity = mouse_position.normalized() * speed
+		else:
+			$"../..".velocity = Vector2.ZERO
+	else:
+		if Vector2($"../..".v_joystick._input_direction).is_zero_approx():
+			$"../..".velocity = 0
+		else:
+			$"../..".velocity += $"../..".v_joystick._input_direction.normalized() * speed
 	$"../..".move_and_slide()

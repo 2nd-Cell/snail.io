@@ -1,14 +1,14 @@
 extends Node2D
 
 @export_group("Spawning Settings")
-@export var spawn_scene: PackedScene
+@export var spawn_scene: Array[PackedScene]
 @export var spawn_interval: float = 1.0
 @export var max_tries_per_attempt: int = 15
+@export var sub_scale := Vector2(1.0, 1.0)
 
 @export_group("Spawn Area")
-@export var spawn_area: Rect2 = Rect2(0, 0, 1000, 1000)
+@export var spawn_area: Rect2 = Rect2(0, 0, 1080, 1920)
 @export var use_relative_position: bool = true
-
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
 @onready var timer: Timer = $Timer
 
@@ -58,9 +58,8 @@ func attempt_spawn() -> void:
 
 
 func spawn_object(pos: Vector2) -> void:
-
-	var obj = spawn_scene.instantiate()
-
+	var obj = spawn_scene.pick_random().instantiate()
+	obj.scale = sub_scale
 	get_tree().current_scene.add_child(obj)
 
 	obj.global_position = pos

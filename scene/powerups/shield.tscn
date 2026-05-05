@@ -1,6 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://cchp4fyevar0t"]
+[gd_scene format=3 uid="uid://cchp4fyevar0t"]
 
-[ext_resource type="Texture2D" uid="uid://cewt03fahx3vn" path="res://ui/shield.png" id="1_okb7e"]
+[ext_resource type="Script" uid="uid://c78mkfvhy5lk2" path="res://script/powerups/powerup_behaviour_control.gd" id="1_8llmw"]
+[ext_resource type="Texture2D" uid="uid://doq1mqm0wra4l" path="res://ui/EndureUp.png" id="2_8llmw"]
+
+[sub_resource type="Animation" id="Animation_tnf3r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_geh7t"]
 resource_name = "flip"
@@ -19,21 +35,6 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(0.1, 1), Vector2(-1, 1), Vector2(-0.1, 1), Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_tnf3r"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8fgsd"]
 _data = {
 &"RESET": SubResource("Animation_tnf3r"),
@@ -43,19 +44,22 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_lj0xh"]
 radius = 451.95575
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=1768984426]
+script = ExtResource("1_8llmw")
+type = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_okb7e")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1129225941]
+texture = ExtResource("2_8llmw")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_8fgsd")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=1924865306]
+libraries/ = SubResource("AnimationLibrary_8fgsd")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 12
+[node name="Area2D" type="Area2D" parent="." unique_id=906884809]
+visible = false
+collision_layer = 2
+collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=853138048]
 shape = SubResource("CircleShape2D_lj0xh")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

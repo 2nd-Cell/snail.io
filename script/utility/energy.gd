@@ -3,7 +3,7 @@ extends TextureProgressBar
 
 var game := true
 var Energy : float = 100.0
-
+var energy_reduction_rate = 0.05
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -12,6 +12,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	if Energy > 0:
-		Energy -= 0.05
+		Energy -= energy_reduction_rate
 		
 	value = Energy

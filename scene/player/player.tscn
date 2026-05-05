@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dug4ua7ratlkk"]
+[gd_scene format=3 uid="uid://dug4ua7ratlkk"]
 
 [ext_resource type="Script" uid="uid://dxrv1gn3y45cf" path="res://script/player/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://danbfprgpiia" path="res://icon.svg" id="2_ajqqa"]
@@ -14,30 +14,36 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=578907068]
+collision_mask = 3
 script = ExtResource("1_hjaqi")
 metadata/IsPlayer = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=395685869]
 texture = ExtResource("2_ajqqa")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1536593679]
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_hjaqi")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1862337671]
 replication_config = SubResource("SceneReplicationConfig_fvtld")
 
-[node name="state_machine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="state_machine" type="Node2D" parent="." unique_id=1130435135 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_6smn3")
 initial_state = NodePath("idle")
 
-[node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("next_state")]
+[node name="move" type="Node" parent="state_machine" unique_id=2131991113 node_paths=PackedStringArray("next_state")]
 script = ExtResource("4_5lop3")
 next_state = NodePath("../idle")
 move_energy_multiplier = -70.0
 
-[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("next_state")]
+[node name="idle" type="Node" parent="state_machine" unique_id=770158219 node_paths=PackedStringArray("next_state")]
 script = ExtResource("5_ajqqa")
 next_state = NodePath("../move")
 idle_energy_multiplier = -50.0
+
+[node name="powerup_duration_timer" type="Timer" parent="." unique_id=846712734]
+one_shot = true
+
+[connection signal="timeout" from="powerup_duration_timer" to="." method="_on_powerup_duration_timer_timeout"]
