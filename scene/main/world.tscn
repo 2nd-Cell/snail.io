@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://3gmhkbuqjpnj"]
 
 [ext_resource type="PackedScene" uid="uid://dug4ua7ratlkk" path="res://scene/player/player.tscn" id="1_vi146"]
+[ext_resource type="PackedScene" uid="uid://bmpap5rutsohk" path="res://scene/map/map.tscn" id="1_win42"]
 [ext_resource type="PackedScene" uid="uid://bk7whuy8efnuw" path="res://scene/utility/energy.tscn" id="4_bd0wy"]
 [ext_resource type="Texture2D" uid="uid://danbfprgpiia" path="res://icon.svg" id="4_k5nhp"]
 [ext_resource type="Script" uid="uid://bi3uogmoqmkmt" path="res://script/utility/pop_up.gd" id="5_duyj1"]
@@ -16,6 +17,8 @@
 radius = 35.0
 
 [node name="world" type="Node2D" unique_id=1538702584]
+
+[node name="map" parent="." unique_id=768064164 instance=ExtResource("1_win42")]
 
 [node name="Player" parent="." unique_id=1526346723 node_paths=PackedStringArray("healthbar", "score_scene", "v_joystick") instance=ExtResource("1_vi146")]
 position = Vector2(576, 324)
@@ -62,10 +65,11 @@ text = "[font=res://ui/fonts/Archivo-VariableFont_wdth,wght.ttf][outline_size=12
 position = Vector2(242, 463)
 texture = ExtResource("4_k5nhp")
 
-[node name="FoodSpawner" type="Node2D" parent="." unique_id=1710309917]
+[node name="FoodSpawner" type="Node2D" parent="." unique_id=1710309917 node_paths=PackedStringArray("player")]
 script = ExtResource("5_duyj1")
 spawn_scene = Array[PackedScene]([ExtResource("7_7lqsl")])
 spawn_interval = 0.5
+player = NodePath("../Player")
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="FoodSpawner" unique_id=496813063]
 position = Vector2(80, 147)
@@ -75,12 +79,13 @@ collide_with_areas = true
 
 [node name="Timer" type="Timer" parent="FoodSpawner" unique_id=488389390]
 
-[node name="PowerupSpawner" type="Node2D" parent="." unique_id=498815419]
+[node name="PowerupSpawner" type="Node2D" parent="." unique_id=498815419 node_paths=PackedStringArray("player")]
 scale = Vector2(0.08, 0.08)
 script = ExtResource("8_7lqsl")
 spawn_scene = Array[PackedScene]([ExtResource("7_y361o"), ExtResource("8_clw4o"), ExtResource("9_y361o")])
 spawn_interval = 5.0
 sub_scale = Vector2(0.08, 0.08)
+player = NodePath("../Player")
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="PowerupSpawner" unique_id=4772048]
 position = Vector2(80, 147)

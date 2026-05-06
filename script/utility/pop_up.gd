@@ -7,8 +7,10 @@ extends Node2D
 @export var sub_scale := Vector2(1.0, 1.0)
 
 @export_group("Spawn Area")
-@export var spawn_area: Rect2 = Rect2(0, 0, 1080, 1920)
-@export var use_relative_position: bool = true
+@export var player: Node2D
+#@export var spawn_area: Rect2 = Rect2(0, 0, 1080, 1920)
+@export var spawn_area: Vector2 = Vector2(1080, 1920)
+#@export var use_relative_position: bool = true
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
 @onready var timer: Timer = $Timer
 
@@ -20,6 +22,10 @@ func _ready() -> void:
 		push_error("Spawner: No spawn_scene assigned!")
 		set_process(false)
 		timer.stop()
+		return
+		
+	if not player:
+		push_error("Spawner: No player assigned! Drag the player node into the inspector.")
 		return
 
 	shape_cast.target_position = Vector2.ZERO
@@ -35,10 +41,13 @@ func _on_timer_timeout() -> void:
 
 func attempt_spawn() -> void:
 
-	var origin: Vector2 = global_position if use_relative_position else Vector2.ZERO
-
-	var min_pos: Vector2 = origin + spawn_area.position
-	var max_pos: Vector2 = origin + spawn_area.end
+	#var origin: Vector2 = global_position if use_relative_position else Vector2.ZERO
+	var origin: Vector2 = player.global_position
+	
+	#var min_pos: Vector2 = origin + spawn_area.position
+	#var max_pos: Vector2 = origin + spawn_area.end
+	var min_pos: Vector2 = origin - (spawn_area / 2.0)
+	var max_pos: Vector2 = origin + (spawn_area / 2.0)
 
 	for i in max_tries_per_attempt:
 
