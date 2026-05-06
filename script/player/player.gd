@@ -30,8 +30,6 @@ func _enter_tree() -> void:
 
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
-	#velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
-
 	move_and_slide()
 
 func _process(delta: float) -> void:
@@ -39,7 +37,6 @@ func _process(delta: float) -> void:
 	score_boost_value += powerup_growth_rate * delta
 
 func _add_energy(qty):
-	#print("Adding Energy: "+str(qty))
 	if healthbar.get_node("TextureProgressBar").Energy < 100:
 		healthbar.get_node("TextureProgressBar").Energy += qty
 
@@ -70,8 +67,12 @@ func _set_powerup(effect: String):
 			pass
 	healthbar.get_node("buff_circle")._set_powerup(effect)
 	healthbar.get_node("BuffBar").setup_bar(60)
+
 func _on_powerup_duration_timer_timeout() -> void:
 	speed_boost = 0
 	score_boost = 0
 	healthbar.get_node("TextureProgressBar").energy_reduction_rate = energy_reduction_value
 	healthbar.get_node("buff_circle")._reset_powerup()
+
+func add_depletion_rate(val: float)-> void:
+	healthbar.get_node("TextureProgressBar").energy_reduction_rate += val

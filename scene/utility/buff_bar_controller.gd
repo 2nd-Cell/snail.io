@@ -10,7 +10,6 @@ func _process(delta: float) -> void:
 	
 	if value > 0:
 		value -= energy_reduction_rate * delta
-		print(value)
 
 func setup_bar(max_timer: int):
 	max_value = max_timer

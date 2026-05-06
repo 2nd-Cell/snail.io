@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://d1x22p3bmrj4h" path="res://ui/foods/Candy_Sparkling.png" id="1_5jsqa"]
 [ext_resource type="Script" uid="uid://drp8a8hjfue6m" path="res://script/utility/foodData.gd" id="1_80cb2"]
+[ext_resource type="Texture2D" uid="uid://r31v2lubibsp" path="res://ui/foods/degradedCandy.png" id="3_2jma6"]
+[ext_resource type="Texture2D" uid="uid://kce2jwullr00" path="res://ui/foods/halfDegradedCandy.png" id="3_mnxx7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_80cb2"]
 radius = 30.0
@@ -14,8 +16,22 @@ energy_given = 5.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2041455635]
 shape = SubResource("CircleShape2D_80cb2")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1067444301]
+[node name="SpriteFresh" type="Sprite2D" parent="." unique_id=1067444301]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_5jsqa")
 
+[node name="Timer" type="Timer" parent="." unique_id=777455018]
+one_shot = true
+
+[node name="SpriteHalf" type="Sprite2D" parent="." unique_id=686943031]
+position = Vector2(-1.9999996, 0.075)
+scale = Vector2(0.09965238, 0.100290135)
+texture = ExtResource("3_mnxx7")
+
+[node name="SpriteDegraded" type="Sprite2D" parent="." unique_id=44626735]
+position = Vector2(-2.0749998, 0.075)
+scale = Vector2(0.10214368, 0.100290135)
+texture = ExtResource("3_2jma6")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
