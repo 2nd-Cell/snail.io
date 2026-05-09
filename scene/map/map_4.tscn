@@ -1,13 +1,13 @@
-[gd_scene format=4 uid="uid://bmpap5rutsohk"]
+[gd_scene format=4 uid="uid://cxwx51dsjbsqb"]
 
-[ext_resource type="Texture2D" uid="uid://ci8naqieaxhmi" path="res://ui/slate.png" id="1_bkhc6"]
-[ext_resource type="Texture2D" uid="uid://8mnmkrigdck7" path="res://ui/brick_pavement.png" id="1_ld61i"]
-[ext_resource type="Texture2D" uid="uid://bnjx2bxeexc6y" path="res://ui/slate_tile_on_grass.png" id="2_yyonm"]
-[ext_resource type="Texture2D" uid="uid://w27e0gln0f4c" path="res://ui/green.png" id="3_4wnb2"]
-[ext_resource type="Texture2D" uid="uid://dj2kxrn0ylna3" path="res://ui/grassy_slate_tile.png" id="4_ld61i"]
+[ext_resource type="Texture2D" uid="uid://8mnmkrigdck7" path="res://ui/brick_pavement.png" id="1_jnhht"]
+[ext_resource type="Texture2D" uid="uid://ci8naqieaxhmi" path="res://ui/slate.png" id="2_n288e"]
+[ext_resource type="Texture2D" uid="uid://bnjx2bxeexc6y" path="res://ui/slate_tile_on_grass.png" id="3_m652u"]
+[ext_resource type="Texture2D" uid="uid://w27e0gln0f4c" path="res://ui/green.png" id="4_dty6m"]
+[ext_resource type="Texture2D" uid="uid://dj2kxrn0ylna3" path="res://ui/grassy_slate_tile.png" id="5_o0uf1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ld61i"]
-texture = ExtResource("1_ld61i")
+texture = ExtResource("1_jnhht")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 1:0/0 = 0
@@ -27,22 +27,22 @@ texture_region_size = Vector2i(128, 128)
 3:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kjdd1"]
-texture = ExtResource("1_bkhc6")
+texture = ExtResource("2_n288e")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2fa8r"]
-texture = ExtResource("2_yyonm")
+texture = ExtResource("3_m652u")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6e376"]
-texture = ExtResource("3_4wnb2")
+texture = ExtResource("4_dty6m")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_me02u"]
-texture = ExtResource("4_ld61i")
+texture = ExtResource("5_o0uf1")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 
@@ -55,7 +55,7 @@ sources/9 = SubResource("TileSetAtlasSource_me02u")
 sources/0 = SubResource("TileSetAtlasSource_ld61i")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hhy40"]
-texture = ExtResource("1_ld61i")
+texture = ExtResource("1_jnhht")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 1:0/0 = 0

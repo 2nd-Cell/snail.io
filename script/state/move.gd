@@ -4,11 +4,15 @@ class_name move
 @export var next_state : state
 
 #@onready var AnimPlayer: = $"../../snail_ui"
-
+enum MovementType{
+	Keyboard,
+	Mouse,
+	TouchScreen
+}
 @export var move_energy_multiplier: float = 1.0
 @export var SPEED = 500.0
 var mouse_position := Vector2(0,0)
-
+@export var MovementStyle:MovementType = MovementType.Keyboard
 func enter():
 	super()
 	#Globals.player_position = $"../..".position
@@ -18,20 +22,25 @@ func exit():
 
 func update(delta: float):
 	super(delta)
-	match OS.get_name():
-		"Windows", "macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD":
+	#match OS.get_name():
+		#"Windows", "macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD":
+			#mouse_position = $"../..".to_local($"../..".get_global_mouse_position())
+		#"Android", "iOS":
+			#pass
+		#"Web":
+			#pass
+		#_:
+			#mouse_position = $"../..".to_local($"../..".get_global_mouse_position())
+
+	match MovementStyle:
+		MovementType.Keyboard:
+			mouse_position = Vector2(Input.get_axis("right", "left"), Input.get_axis("up", "down"))
+		MovementType.Mouse:
 			mouse_position = $"../..".to_local($"../..".get_global_mouse_position())
-		"Android", "iOS":
-			pass
-		"Web":
-			pass
-		_:
-			mouse_position = $"../..".to_local($"../..".get_global_mouse_position())
-			
+		MovementType.TouchScreen:
+			mouse_position = $"../..".v_joystick._input_direction
 	
 	var bar = $"../..".healthbar.get_node("TextureProgressBar")
-	#if bar != null:
-		#bar._update_health( move_energy_multiplier * delta )
 	
 func physics_update(delta: float):
 	super(delta)
@@ -42,15 +51,24 @@ func physics_update(delta: float):
 			is_mobile = true
 	
 	speed += $"../..".speed_boost
-			
-	if not is_mobile:
-		if mouse_position.length() > 50:
+	
+	#if not is_mobile:
+		#if mouse_position.length() > 50:
+			#$"../..".velocity = mouse_position.normalized() * speed
+		#else:
+			#$"../..".velocity = Vector2.ZERO
+	#else:
+		#if Vector2($"../..".v_joystick._input_direction).is_zero_approx():
+			#$"../..".velocity = 0
+		#else:
+			#$"../..".velocity += $"../..".v_joystick._input_direction.normalized() * speed
+	match MovementStyle:
+		MovementType.Keyboard:
 			$"../..".velocity = mouse_position.normalized() * speed
-		else:
-			$"../..".velocity = Vector2.ZERO
-	else:
-		if Vector2($"../..".v_joystick._input_direction).is_zero_approx():
-			$"../..".velocity = 0
-		else:
-			$"../..".velocity += $"../..".v_joystick._input_direction.normalized() * speed
+		MovementType.Mouse:
+			$"../..".velocity = mouse_position.normalized() * speed
+		MovementType.TouchScreen:
+			$"../..".velocity += mouse_position.normalized() * speed
+		
+
 	$"../..".move_and_slide()

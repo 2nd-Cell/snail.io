@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://cbjnnv22fhitp"]
+
+[ext_resource type="PackedScene" uid="uid://bmpap5rutsohk" path="res://scene/map/map.tscn" id="1_po5no"]
+[ext_resource type="PackedScene" uid="uid://dug4ua7ratlkk" path="res://scene/player/player.tscn" id="2_pca0y"]
+[ext_resource type="PackedScene" uid="uid://bolodsplnqnqu" path="res://addons/virtual_joystick/virtual_joystick.tscn" id="3_eurfb"]
+[ext_resource type="PackedScene" uid="uid://bk7whuy8efnuw" path="res://scene/utility/energy.tscn" id="4_lf6vp"]
+[ext_resource type="PackedScene" uid="uid://bu7iodg8bewvb" path="res://scene/utility/game_score.tscn" id="5_8rqqi"]
+[ext_resource type="Texture2D" uid="uid://danbfprgpiia" path="res://icon.svg" id="6_yhfkl"]
+[ext_resource type="Script" uid="uid://bi3uogmoqmkmt" path="res://script/utility/pop_up.gd" id="7_36181"]
+[ext_resource type="PackedScene" uid="uid://bgwm28coyodai" path="res://scene/foods/candy.tscn" id="8_bqbn7"]
+[ext_resource type="Script" uid="uid://ch3f7j15oy2ex" path="res://script/utility/powerup_pop_up.gd" id="9_8770s"]
+[ext_resource type="PackedScene" uid="uid://csw5u1oocau8f" path="res://scene/powerups/score_buff.tscn" id="10_fov6p"]
+[ext_resource type="PackedScene" uid="uid://cchp4fyevar0t" path="res://scene/powerups/shield.tscn" id="11_3fgcn"]
+[ext_resource type="PackedScene" uid="uid://bni457oksll5n" path="res://scene/powerups/speed.tscn" id="12_78qtf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vdike"]
+radius = 35.0
+
+[node name="Game_Scene" type="Node2D" unique_id=662950963]
+
+[node name="map" parent="." unique_id=768064164 instance=ExtResource("1_po5no")]
+
+[node name="Player" parent="." unique_id=578907068 node_paths=PackedStringArray("healthbar", "score_scene", "v_joystick") instance=ExtResource("2_pca0y")]
+position = Vector2(576, 324)
+healthbar = NodePath("energy_bar")
+score_scene = NodePath("score")
+v_joystick = NodePath("Camera2D/VirtualJoystick2")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=366612437]
+position = Vector2(-576, -324)
+anchor_mode = 0
+
+[node name="VirtualJoystick2" parent="Player/Camera2D" unique_id=912784726 instance=ExtResource("3_eurfb")]
+offset_left = -4.0
+offset_top = 4.0
+offset_right = 1078.0
+offset_bottom = 1921.0
+mode = 1
+boundary = 1.5
+vibration_enabled = true
+editor_draw_in_game = true
+
+[node name="energy_bar" parent="Player" unique_id=422151093 instance=ExtResource("4_lf6vp")]
+z_index = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -526.99994
+offset_top = -297.99997
+offset_right = -426.99994
+offset_bottom = 69.00003
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.1, 0.1)
+
+[node name="score" parent="Player" unique_id=1787278512 instance=ExtResource("5_8rqqi")]
+z_index = 2
+offset_left = 247.0
+offset_top = -306.0
+offset_right = 571.0
+offset_bottom = -253.0
+text = "[font=res://ui/fonts/Archivo-VariableFont_wdth,wght.ttf][outline_size=12][outline_color=red][font_size=32][color=]SCORE[/color][/font_size][/outline_color][/outline_size][/font]"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1011614962]
+position = Vector2(242, 463)
+texture = ExtResource("6_yhfkl")
+
+[node name="FoodSpawner" type="Node2D" parent="." unique_id=1298028976 node_paths=PackedStringArray("player")]
+script = ExtResource("7_36181")
+spawn_scene = Array[PackedScene]([ExtResource("8_bqbn7")])
+spawn_interval = 0.5
+player = NodePath("../Player")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="FoodSpawner" unique_id=708454794]
+position = Vector2(80, 147)
+shape = SubResource("CircleShape2D_vdike")
+target_position = Vector2(0, 0)
+collide_with_areas = true
+
+[node name="Timer" type="Timer" parent="FoodSpawner" unique_id=1086334830]
+
+[node name="PowerupSpawner" type="Node2D" parent="." unique_id=1520162063 node_paths=PackedStringArray("player")]
+scale = Vector2(0.08, 0.08)
+script = ExtResource("9_8770s")
+spawn_scene = Array[PackedScene]([ExtResource("10_fov6p"), ExtResource("11_3fgcn"), ExtResource("12_78qtf")])
+spawn_interval = 5.0
+sub_scale = Vector2(0.08, 0.08)
+player = NodePath("../Player")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="PowerupSpawner" unique_id=2133363917]
+position = Vector2(80, 147)
+scale = Vector2(0.08, 0.08)
+shape = SubResource("CircleShape2D_vdike")
+target_position = Vector2(0, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="Timer" type="Timer" parent="PowerupSpawner" unique_id=1851299960]
+wait_time = 60.0

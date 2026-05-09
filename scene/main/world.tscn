@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dug4ua7ratlkk" path="res://scene/player/player.tscn" id="1_vi146"]
 [ext_resource type="PackedScene" uid="uid://bmpap5rutsohk" path="res://scene/map/map.tscn" id="1_win42"]
-[ext_resource type="PackedScene" uid="uid://dy627bilwmi43" path="res://scene/map/map_1.tscn" id="2_ek10f"]
-[ext_resource type="PackedScene" uid="uid://nae3ixcbue2b" path="res://scene/map/map_2.tscn" id="3_fxe1o"]
+[ext_resource type="PackedScene" path="res://scene/map/map_1.tscn" id="2_ek10f"]
+[ext_resource type="PackedScene" path="res://scene/map/map_2.tscn" id="3_fxe1o"]
 [ext_resource type="PackedScene" uid="uid://bk7whuy8efnuw" path="res://scene/utility/energy.tscn" id="4_bd0wy"]
 [ext_resource type="Texture2D" uid="uid://danbfprgpiia" path="res://icon.svg" id="4_k5nhp"]
 [ext_resource type="Script" uid="uid://bi3uogmoqmkmt" path="res://script/utility/pop_up.gd" id="5_duyj1"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cchp4fyevar0t" path="res://scene/powerups/shield.tscn" id="8_clw4o"]
 [ext_resource type="PackedScene" uid="uid://bolodsplnqnqu" path="res://addons/virtual_joystick/virtual_joystick.tscn" id="8_duyj1"]
 [ext_resource type="PackedScene" uid="uid://bni457oksll5n" path="res://scene/powerups/speed.tscn" id="9_y361o"]
+[ext_resource type="PackedScene" uid="uid://bj8acnaofnqpp" path="res://scene/map/map_3.tscn" id="15_k3npw"]
 [ext_resource type="PackedScene" uid="uid://bu7iodg8bewvb" path="res://scene/utility/game_score.tscn" id="17_ic33h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vdike"]
@@ -28,8 +29,10 @@ visible = false
 
 [node name="map2" parent="." unique_id=1233914083 instance=ExtResource("3_fxe1o")]
 visible = false
+scroll_offset = Vector2(468, 1202)
 
 [node name="Player" parent="." unique_id=1526346723 node_paths=PackedStringArray("healthbar", "score_scene", "v_joystick") instance=ExtResource("1_vi146")]
+z_index = 2
 position = Vector2(576, 324)
 healthbar = NodePath("energy_bar")
 score_scene = NodePath("score")
@@ -106,3 +109,5 @@ collide_with_areas = true
 
 [node name="Timer" type="Timer" parent="PowerupSpawner" unique_id=854904895]
 wait_time = 60.0
+
+[node name="map3" parent="." unique_id=882333853 instance=ExtResource("15_k3npw")]
