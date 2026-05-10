@@ -1,5 +1,8 @@
 extends Area2D
 
+@onready var sfx_candy: AudioStreamPlayer2D = $sfx_candy
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+
 @export var score: int
 @export var energy_given: float
 @export var tmr:Timer
@@ -29,6 +32,11 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.get_meta("IsPlayer", false):
+		
+		sfx_candy.play()
+		visible = false
+		collision_shape_2d.set_deferred("disabled", true)
+		
 		body._add_score(score)
 		# add energy according to current state
 		# FOOD_STATE.FRESH gives full energy
@@ -49,6 +57,8 @@ func _on_body_entered(body: Node2D) -> void:
 					#body.add_depletion_rate(energy_given/1000)
 			_:
 				print("[WARN] YOU FUCKED UP")
+				
+	await sfx_candy.finished
 	queue_free()
 
 

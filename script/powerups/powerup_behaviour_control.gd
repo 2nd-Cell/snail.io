@@ -4,6 +4,10 @@ enum Powerup_type{
 	Speed=2,
 	Endurance=3
 }
+
+@onready var sfx_power_up: AudioStreamPlayer2D = $Area2D/sfx_powerUp
+@onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
+
 @export var type:Powerup_type = Powerup_type.Score
 
 func _ready():
@@ -13,6 +17,11 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+
+	#sfx_power_up.play()
+	#visible = false
+	#collision_shape_2d.set_deferred("disabled", true)
+	
 	match(type):
 		Powerup_type.Score:
 			if body.get_meta("IsPlayer", false):
@@ -25,4 +34,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				body._set_powerup("EnduranceBuff")
 	
 	print(type)
+	
+	#await sfx_power_up.finished
 	$".".queue_free()

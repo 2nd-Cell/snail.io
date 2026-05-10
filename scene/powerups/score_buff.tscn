@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cwajkuyy42pf" path="res://ui/coin.png" id="1_7xpsi"]
 [ext_resource type="Script" uid="uid://c78mkfvhy5lk2" path="res://script/powerups/powerup_behaviour_control.gd" id="1_nls5j"]
 [ext_resource type="Texture2D" uid="uid://dye3hr62qhxm" path="res://ui/star_unblur.png" id="2_nls5j"]
+[ext_resource type="AudioStream" uid="uid://ueixad7i4wdv" path="res://sound/koiroylers-get-coin-351945.mp3" id="4_kwwgn"]
 
 [sub_resource type="Animation" id="Animation_tnf3r"]
 length = 0.001
@@ -47,15 +48,15 @@ radius = 366.44235
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8fgsd"]
 particle_flag_disable_z = true
-spread = 150.0
+spread = 180.0
 initial_velocity_min = 270.59
 initial_velocity_max = 1000.0
 gravity = Vector3(0, 98, 0)
+collision_use_scale = true
 
-[node name="Node2D" type="Node2D" unique_id=844141345 node_paths=PackedStringArray("collision_area")]
+[node name="Node2D" type="Node2D" unique_id=844141345]
 scale = Vector2(0.08, 0.08)
 script = ExtResource("1_nls5j")
-collision_area = NodePath("Area2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1687236154]
 texture = ExtResource("1_7xpsi")
@@ -71,13 +72,17 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1058054646]
 shape = SubResource("CircleShape2D_lj0xh")
 
+[node name="sfx_powerUp" type="AudioStreamPlayer2D" parent="Area2D" unique_id=1425248435]
+scale = Vector2(12.500001, 12.500001)
+stream = ExtResource("4_kwwgn")
+
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1734494040]
+scale = Vector2(10, 10)
 emitting = false
+amount = 4
 texture = ExtResource("2_nls5j")
-lifetime = 0.5
-one_shot = true
+speed_scale = 2.0
 explosiveness = 1.0
-randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_8fgsd")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
