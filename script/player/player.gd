@@ -45,7 +45,8 @@ func _add_score(score):
 
 func _ready():
 	powerup_timer = $powerup_duration_timer
-
+	healthbar.get_node("TextureProgressBar").HealthDepletion.connect(_death_time_yay)
+	
 func _set_powerup(effect: String):
 	# RESET BOOSTS and TIMER
 	speed_boost = 0
@@ -73,6 +74,10 @@ func _on_powerup_duration_timer_timeout() -> void:
 	score_boost = 0
 	healthbar.get_node("TextureProgressBar").energy_reduction_rate = energy_reduction_value
 	healthbar.get_node("buff_circle")._reset_powerup()
+
+func _death_time_yay():
+	queue_free()
+	get_tree().change_scene_to_packed(preload("res://scene/main/Death_Scene.tscn"))
 
 func add_depletion_rate(val: float)-> void:
 	healthbar.get_node("TextureProgressBar").energy_reduction_rate += val

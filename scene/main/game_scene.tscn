@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bi3uogmoqmkmt" path="res://script/utility/pop_up.gd" id="7_36181"]
 [ext_resource type="PackedScene" uid="uid://bgwm28coyodai" path="res://scene/foods/candy.tscn" id="8_bqbn7"]
 [ext_resource type="Script" uid="uid://ch3f7j15oy2ex" path="res://script/utility/powerup_pop_up.gd" id="9_8770s"]
-[ext_resource type="PackedScene" uid="uid://csw5u1oocau8f" path="res://scene/powerups/score_buff.tscn" id="10_fov6p"]
+[ext_resource type="PackedScene" uid="uid://csw5u1oocau8f" path="res://scene/powerups/score.tscn" id="10_fov6p"]
 [ext_resource type="PackedScene" uid="uid://cchp4fyevar0t" path="res://scene/powerups/shield.tscn" id="11_3fgcn"]
 [ext_resource type="PackedScene" uid="uid://bni457oksll5n" path="res://scene/powerups/speed.tscn" id="12_78qtf"]
 

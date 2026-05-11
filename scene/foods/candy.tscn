@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://drp8a8hjfue6m" path="res://script/utility/foodData.gd" id="1_80cb2"]
 [ext_resource type="Texture2D" uid="uid://r31v2lubibsp" path="res://ui/foods/degradedCandy.png" id="3_2jma6"]
 [ext_resource type="Texture2D" uid="uid://kce2jwullr00" path="res://ui/foods/halfDegradedCandy.png" id="3_mnxx7"]
-[ext_resource type="AudioStream" uid="uid://dsvdxa3dgciwu" path="res://sound/freesound_community-gulp-48452.mp3" id="5_383tn"]
+[ext_resource type="AudioStream" uid="uid://cn3tfbj0hkn6r" path="res://sound/dragon-studio-pop-402322.mp3" id="5_383tn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_80cb2"]
 radius = 30.0
@@ -36,6 +36,8 @@ texture = ExtResource("3_2jma6")
 
 [node name="sfx_candy" type="AudioStreamPlayer2D" parent="." unique_id=25039531]
 stream = ExtResource("5_383tn")
+volume_db = -5.0
+pitch_scale = 0.5
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

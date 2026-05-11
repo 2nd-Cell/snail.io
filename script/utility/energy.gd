@@ -1,5 +1,5 @@
 extends TextureProgressBar
-
+signal HealthDepletion
 
 var game := true
 var Energy : float = 100.0
@@ -13,5 +13,6 @@ func _process(delta: float) -> void:
 	
 	if Energy > 0:
 		Energy -= energy_reduction_rate
-		
+	else:
+		HealthDepletion.emit()
 	value = Energy

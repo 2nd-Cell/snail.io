@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c78mkfvhy5lk2" path="res://script/powerups/powerup_behaviour_control.gd" id="1_x5ymv"]
 [ext_resource type="Texture2D" uid="uid://fof0c8ydfdt2" path="res://ui/SpeedUp.png" id="2_x5ymv"]
+[ext_resource type="AudioStream" uid="uid://ueixad7i4wdv" path="res://sound/koiroylers-get-coin-351945.mp3" id="3_5e0ji"]
 
 [sub_resource type="Animation" id="Animation_tnf3r"]
 length = 0.001
@@ -61,5 +62,9 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1386594681]
 shape = SubResource("CircleShape2D_lj0xh")
+
+[node name="sfx_powerUp" type="AudioStreamPlayer2D" parent="Area2D" unique_id=1493865218]
+scale = Vector2(12.500001, 12.500001)
+stream = ExtResource("3_5e0ji")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

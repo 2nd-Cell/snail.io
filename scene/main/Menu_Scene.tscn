@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cnjfovwvck6gw"]
+
+[ext_resource type="Script" uid="uid://b8nqc1rvy4vpu" path="res://script/menu/menu_control.gd" id="1_yfurc"]
+
+[node name="MenuScene" type="Node2D" unique_id=343519877]
+
+[node name="Control" type="Control" parent="." unique_id=336956950]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_yfurc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=67461272]
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 865.0
+
+[node name="Button" type="Button" parent="Control/VBoxContainer" unique_id=733505852]
+layout_mode = 2
+action_mode = 0
+text = "PLAYYYY!!!!!"
+flat = true
+
+[connection signal="pressed" from="Control/VBoxContainer/Button" to="Control" method="_on_button_pressed"]

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://domwl8ohpeayf"]
+
+[ext_resource type="Script" uid="uid://b5l2nbqb4paic" path="res://script/menu/death_menu_control.gd" id="1_b8lor"]
+
+[node name="DeathScene" type="Node2D" unique_id=1199626176]
+
+[node name="Control" type="Control" parent="." unique_id=1194962117]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_b8lor")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1645298071]
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 865.0
+
+[node name="Button" type="Button" parent="Control/VBoxContainer" unique_id=1655960329]
+layout_mode = 2
+action_mode = 0
+text = "BACK TO MENU!!!"
+flat = true
+
+[connection signal="pressed" from="Control/VBoxContainer/Button" to="Control" method="_on_button_pressed"]

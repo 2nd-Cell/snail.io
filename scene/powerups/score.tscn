@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://cwajkuyy42pf" path="res://ui/coin.png" id="1_7xpsi"]
 [ext_resource type="Script" uid="uid://c78mkfvhy5lk2" path="res://script/powerups/powerup_behaviour_control.gd" id="1_nls5j"]
-[ext_resource type="Texture2D" uid="uid://dye3hr62qhxm" path="res://ui/star_unblur.png" id="2_nls5j"]
 [ext_resource type="AudioStream" uid="uid://ueixad7i4wdv" path="res://sound/koiroylers-get-coin-351945.mp3" id="4_kwwgn"]
+[ext_resource type="Texture2D" uid="uid://bqcrr2vv2giqn" path="res://ui/star.png" id="5_te1y2"]
 
 [sub_resource type="Animation" id="Animation_tnf3r"]
 length = 0.001
@@ -46,14 +46,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_lj0xh"]
 radius = 366.44235
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8fgsd"]
-particle_flag_disable_z = true
-spread = 180.0
-initial_velocity_min = 270.59
-initial_velocity_max = 1000.0
-gravity = Vector3(0, 98, 0)
-collision_use_scale = true
-
 [node name="Node2D" type="Node2D" unique_id=844141345]
 scale = Vector2(0.08, 0.08)
 script = ExtResource("1_nls5j")
@@ -76,13 +68,10 @@ shape = SubResource("CircleShape2D_lj0xh")
 scale = Vector2(12.500001, 12.500001)
 stream = ExtResource("4_kwwgn")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1734494040]
-scale = Vector2(10, 10)
-emitting = false
-amount = 4
-texture = ExtResource("2_nls5j")
-speed_scale = 2.0
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_8fgsd")
+[node name="FX_Material" type="Node2D" parent="." unique_id=420771872]
+
+[node name="Star" type="Sprite2D" parent="FX_Material" unique_id=1241046037]
+position = Vector2(-3875, 612.5)
+texture = ExtResource("5_te1y2")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
